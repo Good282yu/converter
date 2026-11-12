@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雞腿🍗省錢優惠社群｜蝦皮優惠</title>
+    <style>
+        :root {
+            --bg-dark: #121316;
+            --card-bg: #1E2025;
+            --gold-primary: #F5A623;
+            --gold-gradient: linear-gradient(135deg, #FF9900 0%, #F5A623 50%, #FFD066 100%);
+            --text-main: #FFFFFF;
+            --text-sub: #9EA3B0;
+            --line-green: #06C755;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .container { width: 100%; max-width: 460px; background: var(--card-bg); border-radius: 24px; padding: 28px 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.08); }
+        .badge { display: inline-block; background: rgba(245, 166, 35, 0.15); color: var(--gold-primary); padding: 6px 14px; border-radius: 50px; font-size: 13px; font-weight: 700; margin-bottom: 12px; border: 1px solid rgba(245, 166, 35, 0.3); }
+        h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { color: var(--text-sub); font-size: 14px; margin-bottom: 22px; line-height: 1.5; }
+        
+        /* 推廣碼小卡 */
+        .promo-box { background: rgba(255,255,255,0.04); border: 1px dashed rgba(245, 166, 35, 0.4); border-radius: 16px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+        .promo-info span { display: block; font-size: 12px; color: var(--text-sub); }
+        .promo-info strong { font-size: 18px; color: var(--gold-primary); letter-spacing: 1px; }
+        .copy-code-btn { background: rgba(245, 166, 35, 0.2); color: var(--gold-primary); border: none; padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+        .copy-code-btn:active { transform: scale(0.95); }
+
+        /* 輸入區塊 */
+        .input-label { font-size: 14px; font-weight: 600; margin-bottom: 10px; display: flex; justify-content: space-between; color: #E2E5EC; }
+        textarea { width: 100%; height: 130px; background: #15171B; border: 1.5px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 14px; color: #FFF; font-size: 14px; resize: none; outline: none; transition: 0.2s; margin-bottom: 18px; line-height: 1.5; }
+        textarea:focus { border-color: var(--gold-primary); }
+        textarea::placeholder { color: #5B606D; }
+
+        /* 按鈕群組 */
+        .btn-group { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 14px; }
+        .btn { border: none; border-radius: 14px; padding: 15px; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 6px; text-decoration: none; }
+        .btn:active { transform: scale(0.98); }
+        .btn-primary { background: var(--gold-gradient); color: #121316; box-shadow: 0 6px 20px rgba(245, 166, 35, 0.25); }
+        .btn-clear { background: #2A2D35; color: var(--text-sub); }
+        .btn-line { width: 100%; background: var(--line-green); color: #FFF; margin-top: 6px; }
+
+        /* 結果顯示區 */
+        #resultArea { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+        .result-item { background: #15171B; padding: 12px 14px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.06); }
+        .result-link { color: var(--gold-primary); font-size: 13px; word-break: break-all; text-decoration: none; flex: 1; }
+        .toast { position: fixed; bottom: 30px; background: #FFF; color: #121316; padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 14px; display: none; box-shadow: 0 10px 30px rgba(0,0,0,0.4); z-index: 999; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="badge">🍗 專屬省錢通道</div>
+    <h1>雞腿🍗省錢優惠社群｜蝦皮優惠</h1>
+    <p class="subtitle">貼上蝦皮商品網址，一鍵升級為專屬優惠連結，搭配社群隱藏折價券省更多！</p>
+
+    <div class="promo-box">
+        <div class="promo-info">
+            <span>蝦皮搜尋列輸入專屬推廣碼</span>
+            <strong id="promoCode">AEL-XSJ-LSD</strong>
+        </div>
+        <button class="copy-code-btn" onclick="copyPromoCode()">複製代碼</button>
+    </div>
+
+    <div class="input-label">
+        <span>貼上商品連結（每行一個，最多 5 個）</span>
+    </div>
+    <textarea id="inputUrls" placeholder="請貼上蝦皮商品網址...&#10;例如：https://shopee.tw/..."></textarea>
+
+    <div class="btn-group">
+        <button class="btn btn-primary" onclick="convertLinks()">⚡ 立即轉換優惠連結</button>
+        <button class="btn btn-clear" onclick="clearInput()">清除</button>
+    </div>
+
+    <!-- 如果你有 LINE 社群網址，可以把下方 href 裡面的網址換成你的 LINE 社群連結 -->
+    <a href="https://s.shopee.tw/9V2ypyTXPP" target="_blank" class="btn btn-line" id="lineBtn">
+        💬 前往今日精選優惠 / 加入社群
+    </a>
+
+    <div id="resultArea">
+        <div class="input-label"><span>🎉 轉換成功！點擊可直接前往或複製：</span></div>
+        <div id="resultList"></div>
+    </div>
+</div>
+
+<div class="toast" id="toast">已複製到剪貼簿！</div>
+
+<script>
+    // 已綁定你的專屬推廣者編號：16315590014 與推廣碼 AEL-XSJ-LSD
+    const AFFILIATE_ID = "16315590014";
+    const PROMO_CODE = "AEL-XSJ-LSD";
+    const AFFILIATE_PARAM = `utm_source=an_${AFFILIATE_ID}&utm_medium=affiliates&utm_campaign=-&utm_content=${PROMO_CODE}&mmp_pid=an_${AFFILIATE_ID}`;
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.innerText = msg;
+        t.style.display = 'block';
+        setTimeout(() => { t.style.display = 'none'; }, 2200);
+    }
+
+    function copyPromoCode() {
+        navigator.clipboard.writeText(PROMO_CODE);
+        showToast("✅ 已複製推廣碼：" + PROMO_CODE);
+    }
+
+    function clearInput() {
+        document.getElementById('inputUrls').value = '';
+        document.getElementById('resultArea').style.display = 'none';
+    }
+
+    function convertLinks() {
+        const raw = document.getElementById('inputUrls').value.trim();
+        if (!raw) {
+            showToast("⚠️ 請先貼上蝦皮商品連結喔！");
+            return;
+        }
+        const lines = raw.split('\n').map(l => l.trim()).filter(l => l.length > 0).slice(0, 5);
+        const resultList = document.getElementById('resultList');
+        resultList.innerHTML = '';
+
+        lines.forEach((line) => {
+            const urlMatch = line.match(/https?:\/\/[^\s]+/);
+            if (urlMatch) {
+                let cleanUrl = urlMatch[0].split('?')[0];
+                let finalUrl = cleanUrl + "?" + AFFILIATE_PARAM;
+
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                div.innerHTML = `
+                    <a href="${finalUrl}" target="_blank" class="result-link">${finalUrl}</a>
+                    <button class="copy-code-btn" onclick="navigator.clipboard.writeText('${finalUrl}'); showToast('✅ 已複製轉換連結！')">複製</button>
+                `;
+                resultList.appendChild(div);
+            }
+        });
+
+        if (resultList.children.length > 0) {
+            document.getElementById('resultArea').style.display = 'block';
+        } else {
+            showToast("⚠️ 找不到有效的網址，請確認格式！");
+        }
+    }
+</script>
+
+</body>
+</html>
