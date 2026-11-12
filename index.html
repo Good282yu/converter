@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>雞腿🍗省錢優惠社群｜蝦皮優惠</title>
+    <title>🍗蝦皮優惠</title>
     <style>
         :root {
             --bg-dark: #121316;
@@ -21,10 +21,6 @@
         h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .subtitle { color: var(--text-sub); font-size: 14px; margin-bottom: 22px; line-height: 1.5; }
         
-        /* 推廣碼小卡 */
-        .promo-box { background: rgba(255,255,255,0.04); border: 1px dashed rgba(245, 166, 35, 0.4); border-radius: 16px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
-        .promo-info span { display: block; font-size: 12px; color: var(--text-sub); }
-        .promo-info strong { font-size: 18px; color: var(--gold-primary); letter-spacing: 1px; }
         .copy-code-btn { background: rgba(245, 166, 35, 0.2); color: var(--gold-primary); border: none; padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; white-space: nowrap; }
         .copy-code-btn:active { transform: scale(0.95); }
 
@@ -52,17 +48,9 @@
 <body>
 
 <div class="container">
-    <div class="badge">🍗 專屬省錢通道</div>
-    <h1>雞腿🍗省錢優惠社群｜蝦皮優惠</h1>
-    <p class="subtitle">貼上蝦皮商品網址，一鍵升級為專屬優惠連結，搭配社群隱藏折價券省更多！</p>
-
-    <div class="promo-box">
-        <div class="promo-info">
-            <span>蝦皮搜尋列輸入專屬推廣碼</span>
-            <strong id="promoCode">AEL-XSJ-LSD</strong>
-        </div>
-        <button class="copy-code-btn" onclick="copyPromoCode()">複製代碼</button>
-    </div>
+    <div class="badge">蝦皮優惠</div>
+    <h1>🍗蝦皮優惠</h1>
+    <p class="subtitle">貼上蝦皮商品網址，一鍵升級為專屬優惠連結，搭配專屬折價券省更多！</p>
 
     <div class="input-label">
         <span>貼上商品連結（每行一個，最多 5 個）</span>
@@ -74,9 +62,8 @@
         <button class="btn btn-clear" onclick="clearInput()">清除</button>
     </div>
 
-    <!-- 如果你有 LINE 社群網址，可以把下方 href 裡面的網址換成你的 LINE 社群連結 -->
-    <a href="https://s.shopee.tw/9V2ypyTXPP" target="_blank" class="btn btn-line" id="lineBtn">
-        💬 前往今日精選優惠 / 加入社群
+    <a href="https://s.shopee.tw/7pul3poH36" target="_blank" class="btn btn-line" id="lineBtn">
+        🔥 前往今日精選優惠
     </a>
 
     <div id="resultArea">
@@ -88,7 +75,7 @@
 <div class="toast" id="toast">已複製到剪貼簿！</div>
 
 <script>
-    // 已綁定你的專屬推廣者編號：16315590014 與推廣碼 AEL-XSJ-LSD
+    // 綁定你的專屬推廣者編號：16315590014 與推廣碼 AEL-XSJ-LSD（隱藏於連結中）
     const AFFILIATE_ID = "16315590014";
     const PROMO_CODE = "AEL-XSJ-LSD";
     const AFFILIATE_PARAM = `utm_source=an_${AFFILIATE_ID}&utm_medium=affiliates&utm_campaign=-&utm_content=${PROMO_CODE}&mmp_pid=an_${AFFILIATE_ID}`;
@@ -98,11 +85,6 @@
         t.innerText = msg;
         t.style.display = 'block';
         setTimeout(() => { t.style.display = 'none'; }, 2200);
-    }
-
-    function copyPromoCode() {
-        navigator.clipboard.writeText(PROMO_CODE);
-        showToast("✅ 已複製推廣碼：" + PROMO_CODE);
     }
 
     function clearInput() {
